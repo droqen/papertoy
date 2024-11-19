@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://codqr7nppf21r"]
+
+[ext_resource type="Texture2D" uid="uid://vxxcquojl45c" path="res://pixel/tiles.png" id="1_vhyfs"]
+[ext_resource type="Script" path="res://toy.gd" id="2_qwdby"]
+[ext_resource type="Script" path="res://ladder_reacher.gd" id="3_nt4yy"]
+[ext_resource type="Texture2D" uid="uid://wqomjshr0bbv" path="res://pixel/justladder.png" id="4_l1a3q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1lr3"]
+size = Vector2(10, 10)
+
+[node name="LadderToy" type="Sprite2D"]
+position = Vector2(118, 116)
+texture = ExtResource("1_vhyfs")
+hframes = 10
+vframes = 10
+frame = 20
+script = ExtResource("2_qwdby")
+metadata/_edit_group_ = true
+
+[node name="toy_area" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="toy_area"]
+visible = false
+shape = SubResource("RectangleShape2D_h1lr3")
+
+[node name="ladder_reacher" type="Node2D" parent="."]
+position = Vector2(0, -5)
+script = ExtResource("3_nt4yy")
+
+[node name="ray" type="RayCast2D" parent="ladder_reacher"]
+position = Vector2(0, -1)
+target_position = Vector2(0, -200)
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ladder_reacher"]
+visible = false
+texture = ExtResource("1_vhyfs")
+region_enabled = true
+region_rect = Rect2(10, 10, 10, 10)
+
+[node name="TextureRect" type="TextureRect" parent="ladder_reacher"]
+offset_left = 3.0
+offset_right = 9.0
+offset_bottom = 50.0
+rotation = 3.14159
+texture = ExtResource("4_l1a3q")
+expand_mode = 1
+stretch_mode = 1
+flip_h = true
+flip_v = true

@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://gd6owkucyfex"]
+
+[ext_resource type="Texture2D" uid="uid://vxxcquojl45c" path="res://pixel/tiles.png" id="1_g41gf"]
+[ext_resource type="Script" path="res://toy.gd" id="2_w8b3r"]
+[ext_resource type="Script" path="res://ladder_reacher.gd" id="3_0b7wl"]
+[ext_resource type="Texture2D" uid="uid://hdojelhv0ha2" path="res://pixel/justblock.png" id="4_24m5t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1lr3"]
+size = Vector2(10, 10)
+
+[node name="BlockToy" type="Sprite2D"]
+self_modulate = Color(0.509286, 0.509286, 0.509286, 1)
+position = Vector2(118, 116)
+texture = ExtResource("1_g41gf")
+hframes = 10
+vframes = 10
+frame = 20
+script = ExtResource("2_w8b3r")
+metadata/_edit_group_ = true
+
+[node name="toy_area" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="toy_area"]
+visible = false
+shape = SubResource("RectangleShape2D_h1lr3")
+
+[node name="ladder_reacher" type="Node2D" parent="."]
+position = Vector2(0, -5)
+script = ExtResource("3_0b7wl")
+
+[node name="ray" type="RayCast2D" parent="ladder_reacher"]
+position = Vector2(0, -1)
+target_position = Vector2(0, -200)
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ladder_reacher"]
+visible = false
+texture = ExtResource("1_g41gf")
+region_enabled = true
+region_rect = Rect2(10, 10, 10, 10)
+
+[node name="TextureRect" type="TextureRect" parent="ladder_reacher"]
+offset_left = 5.0
+offset_right = 15.0
+offset_bottom = 50.0
+rotation = 3.14159
+texture = ExtResource("4_24m5t")
+expand_mode = 1
+stretch_mode = 1
+flip_h = true
+flip_v = true

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0c5di2jloqwy"]
+
+[ext_resource type="Texture2D" uid="uid://vxxcquojl45c" path="res://pixel/tiles.png" id="1_sohuj"]
+[ext_resource type="Script" path="res://toy.gd" id="2_hq84e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1lr3"]
+size = Vector2(10, 10)
+
+[node name="Toy" type="Sprite2D"]
+position = Vector2(57, 80)
+texture = ExtResource("1_sohuj")
+hframes = 10
+vframes = 10
+frame = 12
+script = ExtResource("2_hq84e")
+metadata/_edit_group_ = true
+
+[node name="toy_area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="toy_area"]
+visible = false
+shape = SubResource("RectangleShape2D_h1lr3")
